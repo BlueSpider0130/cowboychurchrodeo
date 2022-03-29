@@ -1,0 +1,14 @@
+{
+    "name": "sre/sre",
+	 "description": "Smart Report Engine laravel package",
+	 "version" : "1.2.0",
+       "keywords": ["mysql", "mysql reporting", "reports"],
+    "type": "package",
+	 "homepage": "https://mysqlreportsengine.com",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Sre\\SmartReportingEngine\\": "SmartReportingEngine/src"
+        }
+    }
+}

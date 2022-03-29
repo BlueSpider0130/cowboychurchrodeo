@@ -1,0 +1,1 @@
+<span class="badge {{ $outline ? 'badge-outline-heeler' : 'badge-heeler' }}">Heeler</span>

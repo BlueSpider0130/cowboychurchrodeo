@@ -1,0 +1,14 @@
+{
+    "name": "vagrant/sfp-results",
+    "description": "Sortable, filterable, paginated results.",
+    "require": {
+        "laravel/framework": "^6.2"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SfpResults\\SfpResultsProvider"
+            ]
+        }
+    }
+}

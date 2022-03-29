@@ -1,0 +1,428 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+// Font awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+// Additional utility class
+@import 'utilities';
+
+
+body {
+    background-color: #f2f2f2;
+}
+
+
+/**
+ * Invalid feed back color/size (i.e match style of bootstrap .invalid-feedback)
+ */
+.invalid-feedback-text {
+    font-size: 80%;
+    color: #e3342f;
+}
+
+/**
+ * Label for optional inputs
+ */
+label.optional::after {
+    color: $gray-600;
+    margin-left: 0.5rem;
+    font-size: .75rem;
+    font-weight: normal;
+    content: "(optional)";
+}  
+
+/**
+ * Show table rows as cards on < small
+ */
+table.table-responsive-cards {
+
+    .trc-label {
+        display: none;
+    }
+
+    .trc-label-block {
+        display: none;
+    }
+
+    .d-block {
+        display: none;
+    }
+
+}
+
+@media (max-width: 575.98px) {
+    table.table-responsive-cards {
+        
+        background-color: transparent !important;
+        border: none !important;
+
+        thead {
+            display: none;
+        }
+
+        tbody {
+            border: none;
+
+            tr {
+                display: block;
+                padding: .875rem 1.25rem;
+                border: 1px solid $gray-300;
+                border-radius: .25rem;
+                background-color: $white;
+                margin-bottom: 1rem;
+
+                td {
+                    display: block;
+                    border: none;
+                    padding: .125rem;      
+                }          
+            }
+
+            tr.table-active { 
+                background-color: rgba(0, 0, 0, 0.075);
+                border-color: #dee2e6;
+            }
+            tr.table-primary { 
+                background-color: #c6e0f5;
+                border-color: #95c5ed;
+            }
+            tr.table-secondary { 
+                background-color: #d6d8db;
+                border-color: #b3b7bb;
+            }
+            tr.table-success { 
+                background-color: #c7eed8;
+                border-color: #98dfb6;
+            }
+            tr.table-danger { 
+                background-color: #f7c6c5;
+                border-color: #f09593;
+            }
+            tr.table-warning { 
+                background-color: #fffacc;
+                border-color: #fff6a1;
+            }
+            tr.table-info { 
+                background-color: #d6e9f9;
+                border-color: #b3d7f5;
+            }
+            tr.table-light { 
+                background-color: #fdfdfe;
+                border-color: #fbfcfc;
+            }
+            tr.table-dark { 
+                color: #fff;
+                background-color: #c6c8ca;
+                border-color: #454d55;
+            }   
+
+            .trc-label {
+                display: inline-block;
+                font-weight: bold;
+                padding-right: .25rem;
+            }                
+        }
+
+        tbody.trc-block-labels {
+            
+            tr {
+                padding-top: .65rem;
+                padding-bottom: .65rem;
+
+                td {
+                    padding-top: .35rem;
+                    padding-bottom: .35rem;
+                }
+            }
+
+            .trc-label {
+                display: block;
+                font-weight: bold;
+                padding-right: 0;
+                padding-bottom: .125rem;
+                border-bottom: 1px solid $gray-300;
+                margin-bottom: .125rem;
+            }
+            
+        }
+    }
+
+    .d-block {
+        display: block !important;
+    }
+
+    .d-none {
+        display: none !important;
+    }
+
+    .trc-d-none {
+        display: none !important;
+    }
+}
+
+
+/**
+ * Base styles
+ */
+h1 {
+    font-size: 1.5rem;
+}
+h2 {
+    font-size: 1.25rem;
+}
+
+
+/**
+ * Navbar user dropdown
+ */
+#navbar-user-dropdown {    
+    .fa-icon {
+        font-size: 1rem;
+        width: 1.3rem;
+    }
+
+    // expand dropdown on <= sm
+    @media (max-width: 767.98px) { 
+
+        border-top: rgba(0,0,0,.5);
+
+        .dropdown-menu {
+            display: block;
+            margin: .5rem 0;
+            padding: 0;
+            border: none;
+        }
+        .dropdown-toggle {
+            display: none;
+        }
+        .dropdown-item {
+            border: none;
+            margin: 0;
+            padding: 0.5rem 0;
+            color: rgba(0,0,0,.5);
+        }
+        a.dropdown-item:link,
+        a.dropdown-item:visited,
+        a.dropdown-item:hover,
+        a.dropdown-item:active {
+            color: rgba(0,0,0,.5);
+        }
+    }
+}
+
+
+/**
+ * Navbar search organization input
+ */
+#navbar-search-input {    
+    @media (min-width: 768px) { 
+        width: 20rem;
+    }
+}
+
+
+/**
+ * Rodeo badges
+ */
+@mixin rodeo-badge {
+    font-weight: normal;
+    font-size: .85rem;
+}
+@mixin rodeo-badge-upper {
+    @include rodeo-badge;
+    text-transform: uppercase;
+}
+@mixin color-badge( $color ) {
+    color: $white;
+    background-color: $color;
+}
+@mixin color-outline-badge( $color ) {
+    background-color: transparent;
+    color: $color;
+    border: 1px solid $color;
+}
+
+/**
+ * Header / Heeler badges
+ */
+.badge-header {
+    @include rodeo-badge-upper;
+    @include color-badge( $headerColor );
+}
+.badge-heeler {
+    @include rodeo-badge-upper;
+    @include color-badge( $heelerColor );
+}
+.badge-outline-header {
+    @include rodeo-badge-upper;
+    @include color-outline-badge( $headerColor );
+}
+.badge-outline-heeler {
+    @include rodeo-badge-upper;
+    @include color-outline-badge( $heelerColor );
+}
+.badge-paid { 
+    @include rodeo-badge;
+    color: #fff;
+    background-color: #3B8106;
+}
+.badge-checked-in {
+    @include rodeo-badge;
+    color: #fff;
+    background-color: rgb(230, 107, 39);
+}
+
+
+/**
+ * Membership badge
+ */
+@mixin member-badge {
+    display: inline-block;
+    padding: 0.6em 0.6em;
+    color: #fff;
+    background-color: $memberColor;
+    text-transform: uppercase;
+    font-size: .75em;
+    font-weight: normal;
+    letter-spacing: .08em;
+    line-height: .6;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@mixin pending-member-badge {
+    @include member-badge;
+    color: $memberColor;
+    background-color: transparent;
+    border: 1px solid $memberColor;
+}
+
+@mixin non-member-badge {    
+    @include member-badge;    
+    color: #6c757d;
+    background-color: transparent;
+    border: 1px solid #6c757d;
+}
+
+.member-badge {
+    @include member-badge;
+}  
+
+.pending-member-badge {
+    @include pending-member-badge;
+}  
+
+.non-member-badge {
+    @include non-member-badge;
+}  
+
+
+/**
+ * Member name  (i.e. adds a badge after element containing member name)
+ */
+.member-name::after {
+    @include member-badge;
+    content: "MEMBER"; 
+}
+
+.pending-member-name::after {
+    @include pending-member-badge;
+    content: "PENDING MEMBER"; 
+}
+
+.non-member-name::after {
+    @include non-member-badge;
+    content: "NON-MEMBER"; 
+}
+
+
+/**
+ * Rodeo pill padge
+ **/
+ @mixin rodeo-pill-badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    border-radius: 10rem;
+
+    font-weight: normal;
+    font-size: .85rem;    
+ }
+
+.pill-badge-paid { 
+    @include rodeo-pill-badge;
+    color: #fff;
+    background-color: #3B8106;
+}
+.pill-badge-checked-in {
+    @include rodeo-pill-badge;
+    color: #fff;
+    background-color: rgb(230, 107, 39);
+}
+
+
+/**
+ * Checked in summary table 
+ */
+table.check-in-summary-table {
+
+    td {
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        white-space: nowrap;
+    }
+
+    tr > *:not(:last-child):not(:nth-child(2)) {
+        padding-right: 1rem;
+    }
+
+    td:nth-child(2) {
+        padding-right: 3rem;
+    }
+
+
+    tr.name-row td {
+        border-bottom: 1px solid;
+        font-weight: bold;
+    }
+
+    tr.entry-row td {
+        //
+    }
+
+    tr.office-fee-row td {
+        border-top: 1px solid;
+    }
+
+    tr.subtotal-row td {
+        border-top: 2px solid;
+    }
+
+    tr.total-row td {
+        border-top: 2px solid;
+    }
+
+}

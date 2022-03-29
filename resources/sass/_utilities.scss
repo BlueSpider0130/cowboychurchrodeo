@@ -1,0 +1,123 @@
+/**
+ * Additional utility classes 
+ * 
+ **/
+
+// Remove link color/underline styles
+a.text-reset {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+// Remove list bullets
+ul.no-bullets {
+    list-style-type: none; /* Remove bullets */
+    padding: 0; /* Remove padding */
+    margin: 0; /* Remove margins */
+}
+
+// Remove list styles
+ul.list-reset {
+    list-style-type: none;
+}
+ul.list-reset, ul.list-reset li {
+    margin: 0;
+    padding: 0;
+}
+ol.list-reset li {
+    list-style-type: none;
+}
+
+// Remove heading styles
+h1.h-reset, 
+h2.h-reset, 
+h3.h-reset, 
+h4.h-reset, 
+h5.h-reset, 
+h6.h-reset {
+    font-size: 1em;
+    font-weight: normal;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+}
+
+// Remove button styles
+button.btn-reset {
+    margin: 0;
+    padding: 0;
+    outline: none;
+    border: none !important;;
+    background-color: transparent;    
+}
+
+// Remove legend styles 
+legend.legend-reset {
+    font-size: 1em; 
+    margin: 0; 
+    padding: 0;
+}
+
+// Responsive font weight
+@media (max-width: 575.98px) {
+    .font-weight-xs-inherit {  font-weight: inherit !important;  }
+    .font-weight-xs-normal {  font-weight: normal !important;  }
+    .font-weight-xs-bold {  font-weight: bold !important;  }    
+}
+@media (min-width: 576px) {
+    .font-weight-sm-inherit {  font-weight: inherit !important;  }
+    .font-weight-sm-normal {  font-weight: normal !important;  }
+    .font-weight-sm-bold {  font-weight: bold !important;  }
+}
+@media (min-width: 768px) {
+    .font-weight-md-inherit {  font-weight: inherit !important;  }
+    .font-weight-md-normal {  font-weight: normal !important;  }
+    .font-weight-md-bold {  font-weight: bold !important;  }
+}
+@media (min-width: 992px) {
+    .font-weight-lg-inherit {  font-weight: inherit !important;  }
+    .font-weight-lg-normal {  font-weight: normal !important;  }
+    .font-weight-lg-bold {  font-weight: bold !important;  }
+}
+@media (min-width: 1200px) { 
+    .font-weight-lg-inherit {  font-weight: inherit !important;  }
+    .font-weight-lg-normal {  font-weight: normal !important;  }
+    .font-weight-lg-bold {  font-weight: bold !important;  }
+}
+
+
+// Responsive italic
+.font-italic {  font-style: italic !important;  }
+
+@media (max-width: 575.98px) {
+    .font-italic-xs {  font-style: italic !important;  }
+}
+@media (min-width: 576px) {
+    .font-italic-sm {  font-style: italic !important;  }
+}
+@media (min-width: 768px) {
+    .font-italic-md {  font-style: italic !important;  }
+}
+@media (min-width: 992px) {
+    .font-italic-lg {  font-style: italic !important;  }
+}
+@media (min-width: 1200px) { 
+    .font-italic-lg {  font-style: italic !important;  }
+}
+
+// Responsive border
+@media (max-width: 575.98px) {
+    .border-none { border: none !important;; }
+}
+@media (min-width: 576px) {
+    .border-sm-none { border: none !important;; }
+}
+@media (min-width: 768px) {
+    .border-md-none { border: none !important;; }
+}
+@media (min-width: 992px) {
+    .border-lg-none { border: none !important;; }
+}
+@media (min-width: 1200px) { 
+    .border-xl-none { border: none !important;; }
+}

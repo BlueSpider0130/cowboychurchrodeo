@@ -1,0 +1,62 @@
+@CHARSET "windows-1256";
+body, html, .container-fluid, .row,.col-xs-6 { height: 100%; }
+
+.well{
+				/*position: relative;
+				top: 50%; 
+				-webkit-transform: translateY(-50%);
+				-ms-transform: translateY(-50%);
+				transform: translateY(-50%);*/
+
+				background-color: #fff;
+				margin-top: 20px;
+				/*margin-bottom: 40px;  */
+}
+
+h4{
+		text-align: left;
+		margin-top: 35px;
+		margin-bottom: 20px;
+		margin-left: 15px;
+}
+
+table.reports tr:hover{background-color: #fff4e5;}
+table.reports td{	padding-left: 15px; text-align: left;}
+table.reports td:last-child{ width: 20px; text-align: center; padding: 0;}
+
+.panel-heading { padding: 0;}
+
+.panel-title { margin: 0;	padding: 10px 15px; }
+
+.panel-info >.panel-heading {
+	color: #555;
+	background-color: #96ccf1;
+	border-color: #ffffff;
+}
+.panel-success >.panel-heading {
+	color: #555;
+	background-color: #59e795;
+	border-color: #ebccd1;
+}
+.panel-warning >.panel-heading {
+	color: #555;
+	background-color: #ffba4d;
+	border-color: #ebccd1;
+}
+.panel-danger >.panel-heading {
+	color: #555;
+	background-color: #f9998e;
+	border-color: #ebccd1;
+}
+
+.panel-heading .accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+    float: right;        /* adjust as needed */
+    color: #fff;         /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}

@@ -1,0 +1,129 @@
+@extends('layouts.producer')
+
+@section('content')
+<div class="container-fluid">
+
+    <x-session-alerts />
+
+
+    <h1> Rodeo registration</h1>
+    <hr>
+    <div class="row mb-5">
+        <div class="col-12 col-md-10 col-lg-8">        
+
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <strong style="font-weight: bold;"> {{ $rodeo->name ? $rodeo->name : "Rodeo #{$rodeo->id}" }} </strong> <br> 
+                    <x-rodeo-date :date="$rodeo->starts_at" /> &ndash; <x-rodeo-date :date="$rodeo->ends_at" /> <br>
+                    @if( $rodeo->entry_fee )
+                        Entry fee: {{ $rodeo->entry_fee }} <br>
+                    @endif
+                    @if( $rodeo->opens_at  &&  $rodeo->opens_at > \Carbon\Carbon::now() )
+                        Registration opens: &nbsp; {{ $rodeo->opens_at->toDayDateTimeString() }} <br>
+                    @elseif( $rodeo->closes_at  &&  $rodeo->closes_at > \Carbon\Carbon::now() )
+                        Registration closes: &nbsp; {{ $rodeo->closes_at->toDayDateTimeString() }} <br>
+                    @elseif( $rodeo->starts_at  &&  $rodeo->starts_at > \Carbon\Carbon::now() )
+                        Rodeo starts: &nbsp; {{ $rodeo->starts_at->toDayDateTimeString() }} <br>
+                    @else
+                        @if( $rodeo->starts_at  &&  $rodeo->starts_at <= \Carbon\Carbon::now() )
+                            Rodeo start
+                        @endif
+                    @endif                                        
+                </div>
+            </div>
+
+
+            <h2 class="font-weight-bold my-1 mt-3" style="font-size: 1em;"> Contestant info </h2>
+            <div class="card mb-4">
+                <div class="card-body">
+
+                    <p>
+                        {{ $contestant->last_name }}, {{ $contestant->first_name }} <br>
+                        {{ $contestant->birthdate ? $contestant->birthdate->toFormattedDateString() : '' }}
+                    </p>
+
+                    <address class="mb-0 pb-0">
+                        @if($contestant->address_line_1)
+                            {{ $contestant->address_line_1 }}<br>
+                        @endif
+
+                        @if($contestant->address_line_2)
+                            {{ $contestant->address_line_2 }}<br>
+                        @endif
+                        
+                        @if($contestant->city)
+                            {{ $contestant->city }}, 
+                        @endif
+                        @if($contestant->state)
+                            {{ $contestant->state }} 
+                        @endif
+                        @if($contestant->postcode) 
+                            {{ $contestant->postcode }}
+                        @endif                    
+                        @if($contestant->city || $contestant->state || $contestant->postcode)
+                            <br>
+                        @endif
+                    </address>
+
+                </div>
+            </div>
+
+
+            <h2 class="font-weight-bold my-1 mt-3" style="font-size: 1em;"> Events </h2>
+            <hr>
+            @foreach( $groups as $group )
+                <h3 class="font-weight-bold my-1 mt-3" style="font-size: 1em;"> {{ $group->name }} </h3>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        @foreach( $events as $event )
+
+                            @if( $competition = $competitions->where('group_id', $group->id)->where('event_id', $event->id)->first() )
+<!--
+            < competition-registration :contestant="{{ $contestant }}" :competition="{{ $competition }}"></competition-registration>
+-->
+
+
+
+
+                                <div class="form-check mb-3     mt-5">
+                                    <input 
+                                        class="form-check-input" 
+                                        type="checkbox" 
+                                        id="event-{{ $event->id }}"
+                                        onchange="document.getElementById('competition-{{ $competition->id }}').style.display = this.checked ? 'block' : 'none';"
+                                    >
+                                    <label class="form-check-label" for="event-{{ $event->id }}">
+                                        {{ $event->name }} 
+                                        &nbsp; 
+                                        ${{ $competition->entry_fee ? $competition->entry_fee : '0.00' }}
+                                    </label>
+                                </div>                                
+                                <div class="px-3" style="display: none" id="competition-{{ $competition->id }}">
+                                        Days <br>
+                                        @foreach( $competition->instances as $instance )
+                                            <input type="checkbox">
+                                            <x-rodeo-date :date="$instance->starts_at" />
+                                            <br>
+                                        @endforeach
+                                </div>
+
+                                <div 
+
+                            @endif 
+
+                        @endforeach
+                    </div>
+                </div>
+            @endforeach
+
+
+
+
+        </div><!--/col-->
+    </div><!--/row-->
+
+
+
+</div>
+@endsection

@@ -1,0 +1,1 @@
+<span class="badge {{ $outline ? 'badge-outline-header' : 'badge-header' }}">Header</span>

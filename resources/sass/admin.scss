@@ -1,0 +1,149 @@
+@import 'variables';
+@import 'app';
+
+.admin-breadcrumbs {
+    margin: 0 -15px -1rem -15px;
+}
+
+.admin-body {
+
+    h1 {
+        font-size: 1.2rem;
+    }
+    h2 {
+        font-size: 1.1rem;
+    }
+    h3 {
+        font-size: 1.05rem;
+    }
+
+
+    /*
+     * Navbar
+     */
+    .navbar-brand {
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        font-size: 1rem;
+    }
+     @media (max-width: 767.98px) { 
+        .navbar-dark {
+            .dropdown-menu {
+                background-color: transparent;
+            }
+            .dropdown-item {
+                color: $light !important;
+                background-color: transparent;
+                padding-top: .5rem !important;
+                padding-bottom: .5rem !important;
+            }
+        }
+    }
+
+
+    /*
+     * Content
+     */
+    [role="main"] {
+        padding-top: 48px; /* Space for fixed navbar */
+    }
+
+    @media (min-width: 768px) {
+        [role="main"] {
+            padding-top: 48px; /* Space for fixed navbar */
+        }
+    }
+
+
+    /*
+     * Sidebar
+     */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100; /* Behind the navbar */
+        padding: 48px 0 0; /* Height of navbar */
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    }
+
+    .sidebar-sticky {
+        position: relative;
+        top: 0;
+        height: calc(100vh - 48px);
+        padding-top: .5rem;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    }
+
+    @supports ((position: -webkit-sticky) or (position: sticky)) {
+        .sidebar-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+        }
+    }
+
+    .sidebar .nav-link {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .sidebar .nav-link .feather {
+        margin-right: 4px;
+        color: #999;
+    }
+
+    .sidebar .nav-link.active {
+        color: #007bff;
+    }
+
+    .sidebar .nav-link:hover .feather,
+    .sidebar .nav-link.active .feather {
+        color: inherit;
+    }
+
+    .sidebar-heading {
+        font-size: .75rem;
+        text-transform: uppercase;
+    }
+
+
+    /* 
+     * expand dropdown 
+     */
+    #admin-top-nav {
+
+        @media (max-width: 767.98px) { 
+            .dropdown-menu {
+                display: block;
+                margin: .5rem 0;
+                padding: 0;
+                border: none;
+            }
+            .dropdown-toggle {
+                display: none;
+            }
+            .dropdown-item {
+                border: none;
+                margin: 0;
+                padding: 0;
+                color: rgba(255,255,255,.5);
+            }
+        }
+
+        i {
+            font-size: 1rem;
+            width: 25px;
+        }
+
+    }
+
+    #admin-sidebar {
+        i {
+            font-size: 1.1rem;
+            width: 30px;
+        }
+    }
+
+}

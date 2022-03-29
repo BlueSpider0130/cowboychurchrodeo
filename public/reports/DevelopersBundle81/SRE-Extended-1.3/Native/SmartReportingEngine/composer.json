@@ -1,0 +1,14 @@
+{
+    "name": "sre/sre",
+    "description": "Smart Report Engine",
+	"version" : "1.3.0",
+    "keywords": ["mysql", "mysql reporting", "reports"],
+    "license": "proprietary",
+    "homepage": "https://mysqlreportsengine.com",  
+    "autoload": {
+        "psr-4": {
+            "SRE\\Engine\\": "src/Engine/"
+        },
+        "files": [  "src/Engine/constants.php"]
+    }
+}
