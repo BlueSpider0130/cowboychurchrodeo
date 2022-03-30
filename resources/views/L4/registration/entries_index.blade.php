@@ -6,7 +6,7 @@
     <x-session-alerts />
     <!-- {{$rodeo}} -->
 
-    <h1> Rodeo rddsdfsdfegistration</h1>
+    <h1> Rodeo registration</h1>
     <hr>
     <h2 class="font-weight-bold my-1" style="font-size: 1em;"> Rodeo info </h2>    
     @include('partials.registration.rodeo_info_card')

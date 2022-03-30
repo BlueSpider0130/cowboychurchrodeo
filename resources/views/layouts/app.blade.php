@@ -204,7 +204,8 @@
                         });
                     },
                     error: function(xhr, status, error) {
-                        console.log('error', error)
+                        console.log('error', error);
+                        $("#staticBackdroperr").modal('show');
                     }
                 });
             }

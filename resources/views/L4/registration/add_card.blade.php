@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="row pay-btn-con">
-                <button id="sq-creditcard" class="button-credit-card" onclick="onGetCardNonce(event)">PURCHfdgdfgdfgASE</button>
+                <button id="sq-creditcard" class="button-credit-card" onclick="onGetCardNonce(event)">PURCHASE</button>
                 <!-- {{json_encode($organization)}}<br>organization -->
                 <!-- {{json_encode($rodeo)}}<br>rodeo -->
                 <!-- {{json_encode($contestant)}}<br>contestant -->
@@ -93,9 +93,9 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">Your Payment Request Success!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"> -->
                     <!-- <span aria-hidden="true">&times;</span> -->
-                </button>
+                <!-- </button> -->
             </div>
             <div class="modal-body">
                 <i class="far fa-check-circle"></i>Go to Confirm Page.<i class="far fa-check-circle"></i>
@@ -105,6 +105,25 @@
                     @csrf()
                     <button class="btn btn-primary"> Done! </button>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- -----------------error modal -->
+<div class="modal fade modal-side modal-top-right" id="staticBackdroperr" data-backdrop="" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelerr" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabelerr">Please add correct detail!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <i class="far fa-check-circle"></i><i class="far fa-check-circle"></i>Did you input correct detail of card?
+            </div>
+            <div class="modal-footer">
+                
             </div>
         </div>
     </div>
