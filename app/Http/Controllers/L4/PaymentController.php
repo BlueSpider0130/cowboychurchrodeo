@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Payment;
 use App\RodeoEntry;
+use Carbon\Carbon;
+
 // use App\User;
 
 class PaymentController extends Controller
@@ -38,6 +40,7 @@ class PaymentController extends Controller
         $payment -> tax = $tax;
         $payment -> payer_user_id = $payer_user_id;
         $payment -> created_by_user_id = $payer_user_id;
+        $payment -> method = "3"; 
         $payment -> save();
 
         $getPaymentId = $payment -> where('payer_user_id', $payer_user_id)
@@ -53,6 +56,7 @@ class PaymentController extends Controller
                 'rodeo_id' => $rodeo,
                 'check_in_notes' => $contestant_name . " " . $amount . "amount" . $tax . "fee" . $amount * 1.05 . "total amount", 
                 'checked_in_notes' => 'online Payed',
+                'checked_in_at' => Carbon::now() -> toDateTimeString(),
                 'checked_in_by_user_id' => $payer_user_id,
                 'payment_id' => $getPaymentId
              ]

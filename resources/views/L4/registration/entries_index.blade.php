@@ -145,7 +145,7 @@
         <!-- console is working now -->
         @csrf()
         <input type="hidden" name="pay_data" value='{{json_encode($pay_data)}}' />
-        <button class="btn btn-primary"> Payment </button>
+        <button class="btn btn-primary"> Pay Now </button>
     </form>
     <form method="post" action="{{ route('L4.registration.save', [$organization->id, $rodeo->id, $contestant->id] ) }}">
         @csrf()

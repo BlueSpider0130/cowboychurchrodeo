@@ -99,7 +99,6 @@ class RegistrationController extends Controller
                         ->entries()
                         ->where('contestant_id', $contestant->id)
                         ->first(); //contestant_id & rodeo_id with organization and 
-                        // var_dump(json_encode($rodeoEntry));
 
         $competitionEntries = $rodeo
                     ->competition_entries()

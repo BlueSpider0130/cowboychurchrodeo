@@ -8,6 +8,7 @@
     <!-- <x-session-alerts /> -->
     <div class=" row" id="card_con">
         <div class="col-lg-5 col-md-6 col-sm-12 pay-detail-con">
+            <a href="{{ URL::previous() }}"><button class="back-btn">back</button></a>
             <div class="row check-title">
                 <p>Checkout</p>
             </div>
