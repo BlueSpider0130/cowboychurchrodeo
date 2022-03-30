@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Rodeo App') }}</title>
 
     <!-- Scripts -->
-<script type="text/javascript" src="https://js.squareupsandbox.com/v2/paymentform"></script>
+<script type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -103,7 +103,7 @@
         // Initialize the payment form elements
 
         //TODO: Replace with your sandbox application ID
-        applicationId: "sandbox-sq0idb-GAIKxUpEwpJQxZF5qq8quA",
+        applicationId: "sq0idp-18zG_2Z2V6C-MzP4Hsx_Lg",
         inputClass: 'sq-input',
         autoBuild: false,
         // Customize the CSS for SqPaymentForm iframe elements

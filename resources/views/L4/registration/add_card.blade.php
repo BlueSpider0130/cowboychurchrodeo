@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="row pay-btn-con">
-                <button id="sq-creditcard" class="button-credit-card" onclick="onGetCardNonce(event)">PURCHASE</button>
+                <button id="sq-creditcard" class="button-credit-card" onclick="onGetCardNonce(event)">PURCHfdgdfgdfgASE</button>
                 <!-- {{json_encode($organization)}}<br>organization -->
                 <!-- {{json_encode($rodeo)}}<br>rodeo -->
                 <!-- {{json_encode($contestant)}}<br>contestant -->
