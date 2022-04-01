@@ -14,10 +14,10 @@ class SquareController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $accessToken = env('SQUARE_ACCESS_TOKEN', 'EAAAEC5aSREnBvwiH3pjUwUBxS-ybzpSIiJzUKNipVbm2wwMokMfsmsik21FkBC-');
-        $this->locationId = env('SQUARE_LOCATION_ID', 'LHWPSKK4YPV8R');
+        $accessToken = env('SQUARE_ACCESS_TOKEN', 'EAAAFNTB0xNdLpS4MRHQKxqol0ECPszLSa1q7SRCM8VjTbu0E3AXoHSzaWCUta8f');
+        $this->locationId = env('SQUARE_LOCATION_ID', 'L7RW502H04YHP');
         $defaultApiConfig = new \SquareConnect\Configuration();
-        $defaultApiConfig->setHost("https://connect.squareupsandbox.com");
+        $defaultApiConfig->setHost("https://connect.squareup.com");
         $defaultApiConfig->setAccessToken($accessToken);
         $this->defaultApiClient = new \SquareConnect\ApiClient($defaultApiConfig);
     }
@@ -76,9 +76,9 @@ class SquareController extends Controller
     {
         // var_dump('succjjjjj');
         $cardNonce = $request->nonce;
-        $payAmount = $request -> pay_amount;
-        $payerUserName = $request -> payer_user_name;
-        $payerUserEmail = $request -> payer_user_email;
+        $payAmount = $request->pay_amount;
+        $payerUserName = $request->payer_user_name;
+        $payerUserEmail = $request->payer_user_email;
 
         $customersApi = new \SquareConnect\Api\CustomersApi($this->defaultApiClient);
         $customerId = $this->addCustomer($payerUserName, $payerUserEmail);
@@ -109,7 +109,7 @@ class SquareController extends Controller
 
         # Monetary amounts are specified in the smallest unit of the applicable currency.
         # This amount is in cents. It's also hard-coded for $1.00, which isn't very useful.
-        $amountMoney->setAmount(intval( $payAmount * 1.05 ) * 100); //payamount plus payment fee
+        $amountMoney->setAmount(intval($payAmount * 1.05) * 100); //payamount plus payment fee
         $amountMoney->setCurrency("USD");
         $payment_body->setCustomerId($customerId);
         $payment_body->setSourceId($cardId);
