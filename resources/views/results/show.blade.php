@@ -6,11 +6,18 @@
     <hr>
     {{-- $competition->starts_at->toFormattedDateString() }} &ndash; {{ $competition->ends_at->toFormattedDateString() --}}
     <!-- {{json_encode($checkedInIds)}} -->
+    @php
+        $place = 1;
+    @endphp  
     <table class="table bg-white mt-4">
         <tr>
             <td>name</td>
             <td>Paid</td>
-            <td>score</td>
+            <th> Result(
+                    {{ucfirst($competition->event->result_type)}}
+                ) 
+            </th>
+            <th>Place</th>
         </tr>
         @foreach($results->sortBy('score') as $entry)
             <tr>
@@ -23,15 +30,21 @@
                 @endforeach
                 </td>
                 <td>{{ $entry->score }}</td>
+                <td>{{$place}}</td>
+                @php
+                    $place++
+                @endphp
             </tr>
         @endforeach
         @foreach($pending->sortBy('contestant.last_name') as $entry)
             <tr>
                 <td>{{ $entry->contestant->lexical_name_order }}</td>
                 <td>
-                    @if($entry->payment_id)
-                    <i class="fas fa-check"></i>
-                    @endif
+                    @foreach($checkedInIds as $paidContestantIds)
+                        @if($entry->contestant->id == $paidContestantIds)
+                            <i class="fas fa-check"></i>
+                        @endif
+                    @endforeach
                 </td>
                 <td>
                     @if(in_array($entry->contestant_id, $checkedInIds))
@@ -40,7 +53,10 @@
                         <span class="text-secondary"> ---- </span>
                     @endif
                 </td>
-                <!-- <td>{{$entry}}</td> -->
+                <td>{{$place}}</td>
+                @php
+                    $place++
+                @endphp
             </tr>
         @endforeach
     </table>

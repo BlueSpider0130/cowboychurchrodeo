@@ -27,17 +27,29 @@
     <h2> {{ $competition->group->name }} &ndash; {{ $competition->event->name }} </h2>
     <hr>
     <!-- {{$competition->event}} -->
+    @php
+        $place = 1;
+    @endphp  
     <table class="table table-responsive-cards bg-white border">
         <thead>
             <tr>
                 <th> Entry </th>
                 <th> Contestant </th>
                 <th> Paid </th>
-                <th> Score({{$competition->event->result_type}}) </th>
+                <th> Result(
+                        {{ucfirst($competition->event->result_type)}}
+                    ) 
+                </th>
+                <th>Place</th>
             </tr>
         </thead>
         <tbody>
-            @foreach( $entries->sortBy('score') as $entry )
+            @foreach( $entries->sortBy(function ($entries) {
+                                    if ($entries['score'] === NULL) {
+                                        return PHP_INT_MAX;
+                                    }
+                                    return $entries['score'];
+                                }) as $entry )
                 <tr>
                     <td> 
                         <span class="d-md-none"> Entry: </span>
@@ -61,6 +73,10 @@
                             <small class="text-muted"> <i>No score reported</i> </small>
                         @endif
                     </td>
+                    <td>{{$place}}</td>
+                    @php
+                        $place++
+                    @endphp
                 </tr>
             @endforeach
         </tbody>
