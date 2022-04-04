@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Payment;
 use App\RodeoEntry;
+use App\CompetitionEntry;
 use Carbon\Carbon;
 
 // use App\User;
@@ -32,6 +33,7 @@ class PaymentController extends Controller
                             ->user()
                             ->id;
         $contestant_name = $request -> contestant_name ;
+        $competition_entry_id = $request -> competition_entry_id;
         // dd($contestant_name); exit();
         $payment = new Payment;
 
@@ -46,6 +48,9 @@ class PaymentController extends Controller
         $getPaymentId = $payment -> where('payer_user_id', $payer_user_id)
                                  -> get()
                                  ->max('id');
+                                 
+        $competitionEntry = new CompetitionEntry;
+        $competitionEntry -> where('id', $competition_entry_id)->update(['paid' => "3", 'payment_id' => $getPaymentId]);
 
         $rodeoEntry = new RodeoEntry;
         $rodeoEntry::updateOrCreate
@@ -61,6 +66,7 @@ class PaymentController extends Controller
                 'payment_id' => $getPaymentId
              ]
         );
+
 
     }
 }

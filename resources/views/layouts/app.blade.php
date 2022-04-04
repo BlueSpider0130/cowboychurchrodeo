@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'Rodeo App') }}</title>
 
     <!-- Scripts -->
-<script type="text/javascript" src="https://js.squareup.com/v2/paymentform"></script>
+<script type="text/javascript" src="https://js.squareupsandbox.com/v2/paymentform"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -103,7 +103,7 @@
         // Initialize the payment form elements
 
         //TODO: Replace with your sandbox application ID
-        applicationId: "sq0idp-18zG_2Z2V6C-MzP4Hsx_Lg",
+        applicationId: "sandbox-sq0idb-GAIKxUpEwpJQxZF5qq8quA",
         inputClass: 'sq-input',
         autoBuild: false,
         // Customize the CSS for SqPaymentForm iframe elements
@@ -159,6 +159,7 @@
                 const payer_user_name = $("#payer_user_name").val();
                 const payer_user_email = $("#payer_user_email").val();
                 const contestant_name = $("#contestant_name").val();
+                const competition_entry_id = $("#competition_entries_id").val();
                 console.log(contestant_id);
                 // $('#success').hide();
                 $("#sq-creditcard").prop('disabled', true);
@@ -191,7 +192,8 @@
                                 'contestant_id':contestant_id,
                                 'rodeo' : rodeo,
                                 'payer_user_name' : payer_user_name,
-                                'contestant_name' : contestant_name
+                                'contestant_name' : contestant_name,
+                                'competition_entry_id' : competition_entry_id
                             },
                             success: function(data) {
                                 console.log("success");

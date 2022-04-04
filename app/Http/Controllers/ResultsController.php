@@ -30,6 +30,7 @@ class ResultsController extends Controller
                                     ->whereNotNull('checked_in_at')
                                     ->pluck('contestant_id')
                                     ->toArray();
+        
        return view('results.show', $data);
     }
 }

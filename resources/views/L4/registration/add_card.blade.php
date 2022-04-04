@@ -44,6 +44,7 @@
                 <input type="hidden" id="payer_user_name" value="{{$payer_user_name}}" />
                 <input type="hidden" id="payer_user_email" value="{{$payer_user_email}}" />
                 <input type="hidden" id="contestant_name" value="{{$contestant -> name}}" />
+                <input type="hidden" id="competition_entries_id" value="{{$competitionEntries[0] -> id}}" />
             </div>
         </div>
 
@@ -79,7 +80,7 @@
                 <!-- {{json_encode($sortedCompetitions)}}<br>sortedCompetitions -->
                 <!-- {{json_encode($payData)}}<br>payData -->
                 <!-- {{json_encode($payAmount)}}<br>payAmount -->
-                <!-- {{json_encode($competitionEntries)}}<br>competitionEntries -->
+                <!-- {{json_encode($competitionEntries[0] -> id)}}<br>competitionEntries -->
             </div>
         </div>
     </div>

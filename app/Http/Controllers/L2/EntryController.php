@@ -188,6 +188,7 @@ class EntryController extends Controller
         }
 
         $contestant = $request->input('contestant')  ?  Contestant::find( $request->input('contestant') )  :  null;
+        // dd("asdf");exit();
         $instance = $request->input('instance') ? CompetitionInstance::find( $request->input('instance') ) : null;
 
         $instanceIds = $competition->instances()->pluck('id')->toArray();
@@ -259,6 +260,7 @@ class EntryController extends Controller
             'no_score'       => isset($validated['no_score']) ? true : false,
             'instance_id'    => $validated['instance']
         ]);
+        // dd("abcd"); exit();
 
         return redirect()
                 ->route('L2.entries.index', [$organization, $competition])

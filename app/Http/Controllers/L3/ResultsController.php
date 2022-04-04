@@ -91,6 +91,10 @@ class ResultsController extends Controller
             abort( 404 );
         } 
 
+        $checkInIds = \App\RodeoEntry::where('rodeo_id', $competition->rodeo_id)
+                            ->whereNotNull('checked_in_at')
+                            ->pluck('contestant_id')
+                            ->toArray();
         $entries = $rodeo
                     ->competition_entries()
                     ->where('competition_id', $competition->id)
@@ -102,7 +106,8 @@ class ResultsController extends Controller
                 ->with('organization', $organization)
                 ->with('rodeo', $rodeo)
                 ->with('competition', $competition)
-                ->with('entries', $entries);
+                ->with('entries', $entries)
+                ->with('checkInIds', $checkInIds);
     }
 
 

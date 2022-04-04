@@ -140,7 +140,7 @@ class ReportsController extends Controller
                 $data[$key]['events'][] = $name;
             }
         }
-
+        // dd("asdf"); exit();
         return view('L2.reports.entries')
                 ->with('organization', $organization)
                 ->with('rodeo', $rodeo)

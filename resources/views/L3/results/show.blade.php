@@ -26,16 +26,18 @@
 
     <h2> {{ $competition->group->name }} &ndash; {{ $competition->event->name }} </h2>
     <hr>
+    <!-- {{$competition->event}} -->
     <table class="table table-responsive-cards bg-white border">
         <thead>
             <tr>
                 <th> Entry </th>
                 <th> Contestant </th>
-                <th> Score </th>
+                <th> Paid </th>
+                <th> Score({{$competition->event->result_type}}) </th>
             </tr>
         </thead>
         <tbody>
-            @foreach( $entries as $entry )
+            @foreach( $entries->sortBy('score') as $entry )
                 <tr>
                     <td> 
                         <span class="d-md-none"> Entry: </span>
@@ -43,6 +45,13 @@
                     </td>
                     <td> 
                         {{ $entry->contestant->lexical_name_order }} 
+                    </td>
+                    <td>
+                        @foreach($checkInIds as $paidContestantIds)
+                            @if($entry->contestant->id == $paidContestantIds)
+                                <i class="fas fa-check"></i>
+                            @endif
+                        @endforeach
                     </td>
                     <td> 
                         <span class="d-md-none"> Score: </span> 
