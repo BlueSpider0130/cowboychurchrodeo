@@ -8,6 +8,8 @@
     <!-- {{json_encode($checkedInIds)}} -->
     @php
         $place = 1;
+        $result_type = $competition->event->result_type;
+        $GLOBALS['type'] = $competition -> event -> result_type;
     @endphp  
     <table class="table bg-white mt-4">
         <tr>
@@ -19,7 +21,13 @@
             </th>
             <th>Place</th>
         </tr>
-        @foreach($results->sortBy('score') as $entry)
+        @foreach( $results->sortBy(function ($results, $result_time) {
+                                    if (!is_numeric($results['score'])) {
+                                        return PHP_INT_MAX;
+                                    }
+                                    $flag = ($GLOBALS['type'] == 'time') ? $results['score'] : -$results['score'];
+                                    return $flag;
+                                }) as $entry )
             <tr>
                 <td>{{ $entry->contestant->lexical_name_order }}</td>
                 <td>

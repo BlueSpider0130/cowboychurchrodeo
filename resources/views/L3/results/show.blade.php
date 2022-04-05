@@ -26,9 +26,10 @@
 
     <h2> {{ $competition->group->name }} &ndash; {{ $competition->event->name }} </h2>
     <hr>
-    <!-- {{$competition->event}} -->
+    <!-- {{var_dump( $competition->event->result_type)}} -->
     @php
         $place = 1;
+        $GLOBALS['type'] = $competition -> event -> result_type;
     @endphp  
     <table class="table table-responsive-cards bg-white border">
         <thead>
@@ -44,12 +45,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach( $entries->sortBy(function ($entries) {
-                                    if ($entries['score'] === NULL) {
+            @foreach( $entries->sortBy(function ($entries, $result_time) {
+                                    if (!is_numeric($entries['score'])) {
                                         return PHP_INT_MAX;
                                     }
-                                    return $entries['score'];
+                                    $flag = ($GLOBALS['type'] == 'time') ? $entries['score'] : -$entries['score'];
+                                    return $flag;
                                 }) as $entry )
+
                 <tr>
                     <td> 
                         <span class="d-md-none"> Entry: </span>
