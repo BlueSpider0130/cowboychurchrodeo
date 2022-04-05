@@ -60,7 +60,7 @@ class PaymentController extends Controller
                 'contestant_id' => $contestant_user_id,
                 'rodeo_id' => $rodeo,
                 'check_in_notes' => $contestant_name . " " . $amount . "amount" . $tax . "fee" . $amount * 1.05 . "total amount", 
-                'checked_in_notes' => 'Paid Onine',
+                'checked_in_notes' => 'Paid Online',
                 'checked_in_at' => Carbon::now() -> toDateTimeString(),
                 'checked_in_by_user_id' => $payer_user_id,
                 'payment_id' => $getPaymentId
