@@ -8,6 +8,8 @@ use App\Organization;
 use App\Rodeo;
 use App\Competition;
 use App\CompetitionEntry;
+use App\Series;
+use App\Membership;
 
 class ResultsController extends Controller
 {
@@ -91,6 +93,12 @@ class ResultsController extends Controller
             abort( 404 );
         } 
 
+        $memberships = $rodeo
+                        ->series()
+                        ->with('memberships')
+                        ->get()
+                        ->pluck('memberships');
+                        // dd($series); exit();
         $checkInIds = \App\RodeoEntry::where('rodeo_id', $competition->rodeo_id)
                             ->whereNotNull('checked_in_at')
                             ->pluck('contestant_id')
@@ -107,7 +115,8 @@ class ResultsController extends Controller
                 ->with('rodeo', $rodeo)
                 ->with('competition', $competition)
                 ->with('entries', $entries)
-                ->with('checkInIds', $checkInIds);
+                ->with('checkInIds', $checkInIds)
+                ->with('memberships', $memberships);
     }
 
 

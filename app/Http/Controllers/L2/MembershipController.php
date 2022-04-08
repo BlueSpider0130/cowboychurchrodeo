@@ -62,6 +62,7 @@ class MembershipController extends Controller
                         ->with('contestant')
                         ->get()
                         ->sortBy('contestant.last_name');
+                        // dd($series); exit();
 
         return view('L2.memberships.index')
                 ->with('organization', $organization)

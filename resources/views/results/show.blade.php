@@ -9,6 +9,8 @@
     @php
         $place = 1;
         $result_type = $competition->event->result_type;
+        $previous = '0';
+        $counter = 0;
         $GLOBALS['type'] = $competition -> event -> result_type;
     @endphp  
     <table class="table bg-white mt-4">
@@ -38,10 +40,21 @@
                 @endforeach
                 </td>
                 <td>{{ $entry->score }}</td>
-                <td>{{$place}}</td>
-                @php
-                    $place++
-                @endphp
+                <td>
+                    @php
+                        $counter++;
+                        if($previous == $entry->score || $previous == '0'){
+                            if($entry->score != null){
+                                echo $place;
+                                $previous = $entry->score;
+                            }
+                        }elseif($entry->score != null){
+                            $place = $counter;
+                            echo $place;
+                            $previous = $entry->score;
+                        }
+                    @endphp
+                </td>
             </tr>
         @endforeach
         @foreach($pending->sortBy('contestant.last_name') as $entry)
@@ -61,7 +74,7 @@
                         <span class="text-secondary"> ---- </span>
                     @endif
                 </td>
-                <td>{{$place}}</td>
+                <td></td>
                 @php
                     $place++
                 @endphp

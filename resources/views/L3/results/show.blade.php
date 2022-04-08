@@ -11,7 +11,7 @@
     </nav>
 </div>
 <div class="container-fluid">
-
+<!-- {{$memberships}} -->
     <x-session-alerts />
 
     <h1> Record results </h1>
@@ -26,16 +26,18 @@
 
     <h2> {{ $competition->group->name }} &ndash; {{ $competition->event->name }} </h2>
     <hr>
-    <!-- {{var_dump( $competition->event->result_type)}} -->
     @php
         $place = 1;
+        $counter = 0;
         $GLOBALS['type'] = $competition -> event -> result_type;
+        $previous = '0';
     @endphp  
     <table class="table table-responsive-cards bg-white border">
         <thead>
             <tr>
                 <th> Entry </th>
                 <th> Contestant </th>
+                <th> Member </th>
                 <th> Paid </th>
                 <th> Result(
                         {{ucfirst($competition->event->result_type)}}
@@ -47,19 +49,30 @@
         <tbody>
             @foreach( $entries->sortBy(function ($entries, $result_time) {
                                     if (!is_numeric($entries['score'])) {
-                                        return PHP_INT_MAX;
+                                        if($entries['score'] == null){
+                                            return PHP_INT_MAX;
+                                        }else return PHP_INT_MAX-1;
                                     }
                                     $flag = ($GLOBALS['type'] == 'time') ? $entries['score'] : -$entries['score'];
                                     return $flag;
-                                }) as $entry )
+                                }) as $key => $entry )
 
                 <tr>
+                    <!-- {{$entry}} -->
                     <td> 
                         <span class="d-md-none"> Entry: </span>
                         #{{ $entry->id }} 
                     </td>
                     <td> 
                         {{ $entry->contestant->lexical_name_order }} 
+                    </td>
+                    <td>
+                        @foreach($memberships[0] as $is_member)
+                            @if($entry -> contestant_id == $is_member -> id)
+                                <!-- <i class="fas fa-check" style="color: blue"></i> -->
+                                <span class="member-badge">MEMBER</span>
+                            @endif
+                        @endforeach
                     </td>
                     <td>
                         @foreach($checkInIds as $paidContestantIds)
@@ -76,10 +89,21 @@
                             <small class="text-muted"> <i>No score reported</i> </small>
                         @endif
                     </td>
-                    <td>{{$place}}</td>
-                    @php
-                        $place++
-                    @endphp
+                    <td>
+                        @php
+                            $counter++;
+                            if($previous == $entry->score || $previous == '0'){
+                                if($entry->score != null){
+                                    echo $place;
+                                    $previous = $entry->score;
+                                }
+                            }elseif($entry->score != null && is_numeric($entry->score)){
+                                $place = $counter;
+                                echo $place;
+                                $previous = $entry->score;
+                            }
+                        @endphp
+                    </td>
                 </tr>
             @endforeach
         </tbody>
