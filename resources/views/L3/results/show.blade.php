@@ -68,7 +68,7 @@
                     </td>
                     <td>
                         @foreach($memberships[0] as $is_member)
-                            @if($entry -> contestant_id == $is_member -> id)
+                            @if($entry -> contestant_id == $is_member -> contestant_id)
                                 <!-- <i class="fas fa-check" style="color: blue"></i> -->
                                 <span class="member-badge">MEMBER</span>
                             @endif
