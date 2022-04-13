@@ -125,7 +125,7 @@
                         @if( $entered < 1  ||   null === $competition->max_entries_per_contestant  ||  $entered < $competition->max_entries_per_contestant )
                             @if( 1 !== $competition->max_entries_per_contestant )
                                 <p class="text-secondary my-1" style="font-size: .85rem; font-style: italic;">
-                                    {{ $competition->max_entries_per_contestant > 1  ?  $competition->max_entries_per_contestant  :  'Multiple' }} entries allowed. hhh
+                                    {{ $competition->max_entries_per_contestant > 1  ?  $competition->max_entries_per_contestant  :  'Multiple' }} entries allowed. 
                                 </p>
                             @endif
                             <div>
