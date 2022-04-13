@@ -78,7 +78,12 @@
                                                 <br>
                                             @endif
                                             <br>
-                                        @endif     
+                                        @endif   
+                                        
+                                        @if( $contestant->phone )
+                                            <b>Phone</b>
+                                            {{ $contestant->phone }}<br>
+                                        @endif
 <?php
 /*
                                         <a href="#{{-- route('L4.registration.rodeos', [$organization, $contestant]) --}}" class="btn btn-outline-primary btn-sm">

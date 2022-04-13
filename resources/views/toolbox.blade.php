@@ -43,7 +43,7 @@
                     Registration
                 </a>
 
-                <a href="{{ route('L4.results.home', $organization) }}" class="list-group-item list-group-item-action"> 
+                <a href="{{ route('L4.results.home', $organization) }}" class="list-group-item list-group-item-action" style="display: none;"> 
                     <i class="fas fa-trophy mr-1"></i>
                     Results
                 </a>

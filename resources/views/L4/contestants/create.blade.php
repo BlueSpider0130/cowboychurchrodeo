@@ -76,6 +76,13 @@
                     </div>
                 </div><!--/row-->
 
+                <div class="row mb-4 md-3">
+                    <div class="col-12">
+                        <label for="phone"> Phone Number </label>
+                        <x-form.input type="tel" id="phone" name="phone" />
+                    </div>
+                </div><!--/row-->
+
                 <hr>
 
                 <x-form.buttons submit-name="Add" :cancel-url="route('L4.contestants.index', $organization)" />
