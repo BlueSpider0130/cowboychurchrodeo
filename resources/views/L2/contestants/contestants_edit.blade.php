@@ -76,6 +76,21 @@
                     </div>
                 </div><!--/row-->
 
+                <div class="row mb-4 md-3">
+                    <div class="col-12">
+                        <label for="gender"> Gender </label>
+                        <x-form.select name="sex" id="sex" :options="['male' => 'male', 'female' => 'female']">
+                        </x-form.select>
+                    </div>
+                </div><!--/row-->
+
+                <div class="row mb-4 md-3">
+                    <div class="col-12">
+                        <label for="phone"> Phone Number(Phone number must be 10 digitals and start with 1) </label>
+                        <x-form.input type="text" id="phone" name="phone" required />
+                    </div>
+                </div><!--/row-->
+
                 <hr>
 
                 <x-form.buttons submit-name="Update" :cancel-url="route('L2.contestants.show', [$organization, $contestant])" />

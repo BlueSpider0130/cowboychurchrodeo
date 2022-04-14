@@ -20,6 +20,14 @@
 
         <div style="height: 500px; overflow-y: auto">
             <table class="table bg-white border">
+                <thead>
+                    <th></th>
+                    <th>Contestant</th>
+                    <th></th>
+                    <th>Check in Notes</th>
+                    <th></th>
+                    <th></th>
+                </thead>
                 @foreach( $contestantsByDay as $timestamp => $data )
                     @foreach( $data['contestants'] as $contestant )
                         <tr>
@@ -34,6 +42,25 @@
                             <td style="padding: 0"> 
                                 <label class="d-block" style="padding: .75rem" for="contestant-{{ $contestant->id }}"> 
                                     {{ $contestant->lexical_name_order }} 
+                                </label>
+                            </td>
+                            <td style="padding: 0"> 
+                                <label class="d-block" style="padding: .75rem" for="contestant-{{ $contestant->id }}"> 
+                                    <!-- {{ $contestant->sex }} -->
+                                    @if( $contestant->sex )
+                                    <img src="/assets/{{$contestant->sex}}.png">
+                                    @else
+                                    ---
+                                    @endif
+                                </label>
+                            </td>
+                            <td style="padding: 0"> 
+                                <label class="d-block" style="padding: .75rem" for="contestant-{{ $contestant->id }}"> 
+                                    @foreach( $checkInEntries as $entry )
+                                        @if( $contestant->id == $entry->contestant_id )
+                                            {{$entry->check_in_notes}}
+                                        @endif
+                                    @endforeach
                                 </label>
                             </td>
                             <td>

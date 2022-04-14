@@ -54,6 +54,13 @@
                                             <b>Birthdate: </b> {{ $contestant->birthdate ? $contestant->birthdate->toFormattedDateString() : '' }} <br>
                                         @endif
                                         <br>
+                                        @if( $contestant->sex )
+                                            <p>
+                                                <span class="mr-2 font-weight-bold"> Gender: </span> 
+                                                {{ $contestant->sex }}
+                                                <img src="/assets/{{$contestant->sex}}.png">
+                                            </p>
+                                        @endif
 
                                         @if($contestant->address_line_1 || $contestant->city || $contestant->state || $contestant->postcode)
                                             <b>Address: </b> <br>

@@ -19,12 +19,14 @@ class Contestant extends Model
         'first_name', 
         'last_name', 
         'birthdate', 
+        'sex',
         'photo_path', 
         'address_line_1', 
         'address_line_2', 
         'city', 
         'state', 
         'postcode',
+        'phone',
         'is_member',
     ];
 

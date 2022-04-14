@@ -45,6 +45,13 @@
                                     {{ $contestant->birthdate->toFormattedDateString() }}
                                 </p>
                             @endif
+                            @if( $contestant->sex )
+                                <p>
+                                    <span class="mr-2 font-weight-bold"> Gender: </span> 
+                                    {{ $contestant->sex }}
+                                    <img src="/assets/{{$contestant->sex}}.png">
+                                </p>
+                            @endif
                             <p class="mb-0">
                                 <span class="mr-2 font-weight-bold"> Address: </span>
                                 <address class="mb-0">
@@ -60,6 +67,12 @@
                                     <br>
                                 </address>
                             </p>
+                            @if( $contestant->phone )
+                                <p>
+                                    <span class="mr-2 font-weight-bold"> Phone Number: </span> 
+                                    {{ $contestant->phone}}
+                                </p>
+                            @endif
                         </div>
 
                         <div class="col-12 col-md text-md-right">

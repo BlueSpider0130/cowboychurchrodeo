@@ -13,7 +13,6 @@
     @enderror
 
     <h1> {{ $rodeo->name ? $rodeo->name : 'Rodeo #'.$rodeo->id }} </h1>
-    
     <ul class="nav nav-tabs mt-4 mb-4">
         <li class="nav-item">
             <a class="nav-link active" href="#">Check in</a>
@@ -30,6 +29,7 @@
             :organization="$organization" 
             :rodeo="$rodeo" 
             :contestants="$contestantsByDay" 
+            :check-in-entries="$checkInEntries"
         />
     @endif
 

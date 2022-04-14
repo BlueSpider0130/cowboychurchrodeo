@@ -78,8 +78,16 @@
 
                 <div class="row mb-4 md-3">
                     <div class="col-12">
-                        <label for="phone"> Phone Number </label>
-                        <x-form.input type="tel" id="phone" name="phone" />
+                        <label for="gender"> Gender </label>
+                        <x-form.select name="sex" id="sex" :options="['male' => 'male', 'female' => 'female']">
+                        </x-form.select>
+                    </div>
+                </div><!--/row-->
+
+                <div class="row mb-4 md-3">
+                    <div class="col-12">
+                        <label for="phone"> Phone Number(Phone number must be 10 digitals and start with 1) </label>
+                        <x-form.input type="text" id="phone" name="phone" required />
                     </div>
                 </div><!--/row-->
 

@@ -33,6 +33,8 @@ class ContestantStore extends FormRequest
             'state'           => 'nullable|max:255',
             'postcode'        => 'nullable|max:255',
             'birthdate'       => 'nullable|date', 
+            'phone' => 'required | numeric | digits:10 | starts_with:1',
+            'sex' => 'required'
         ];
     }
 }

@@ -110,6 +110,10 @@ class CheckInController extends Controller
             abort(404);
         }
 
+        $checkInEntries = $rodeo
+                            ->entries()
+                            ->get();
+
         $checkedInEntries = $rodeo
                             ->entries()
                             ->whereNotNull('checked_in_at')
@@ -167,7 +171,8 @@ class CheckInController extends Controller
                 ->with('organization', $organization)
                 ->with('rodeo', $rodeo)
                 ->with('contestantsByDay', $contestantsByDay)
-                ->with('checkedInEntries', $checkedInEntries);
+                ->with('checkedInEntries', $checkedInEntries)
+                ->with('checkInEntries', $checkInEntries);
     }
 
 

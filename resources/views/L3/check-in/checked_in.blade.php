@@ -34,7 +34,9 @@
                 <thead>
                     <tr> 
                         <th> Contestant </th>
-                        <th> </th>
+                        <th> </th><!--   gender -->
+                        <th> </th><!--   membership badge header -->
+                        <th> Check in notes </th>
                         <th> Checked in notes </th>
                         <th> </th>
                     </tr>
@@ -46,10 +48,16 @@
                                 {{ $entry->contestant->lexical_name_order }}                                 
                             </td>
                             <td>
+                                @if( $entry->contestant->sex )
+                                    <img src="/assets/{{$entry->contestant->sex}}.png">
+                                @endif
+                            </td>
+                            <td>
                                 @if( $rodeo->series_id )
                                     <x-membership-badge :contestant="$entry->contestant" :series="$rodeo->series_id" class="pl-3" />
                                 @endif 
                             </td>                                
+                            <td> {{ $entry->check_in_notes }} </td>
                             <td> {{ $entry->checked_in_notes }} </td>
                             <td class="text-md-center"> 
                                 <form method="post" action="{{ route('L3.check-in.destroy', [$organization->id, $entry->id]) }}">

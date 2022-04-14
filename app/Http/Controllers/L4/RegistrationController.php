@@ -177,7 +177,6 @@ class RegistrationController extends Controller
             $rodeoEntry = RodeoEntry::create([
                 'contestant_id' => $contestant->id,
                 'rodeo_id' => $rodeo->id,
-                // 'check_in_notes' => '123456'
             ]);
 
             $rodeoEntry->touch();

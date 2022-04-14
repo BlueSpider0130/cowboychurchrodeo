@@ -9,17 +9,19 @@ class ContestantSelect extends Component
     public $organization;
     public $rodeo;
     public $contestantsByDay;
+    public $checkInEntries;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct( $organization, $rodeo, $contestants )
+    public function __construct( $organization, $rodeo, $contestants, $checkInEntries )
     {
         $this->organization = $organization;
         $this->rodeo = $rodeo;
         $this->contestantsByDay = $contestants;
+        $this->checkInEntries = $checkInEntries;
     }
 
     /**
