@@ -86,8 +86,8 @@
 
                 <div class="row mb-4 md-3">
                     <div class="col-12">
-                        <label for="phone"> Phone Number(Phone number must be 10 digitals and start with 1) </label>
-                        <x-form.input type="text" id="phone" name="phone" required />
+                        <label for="phone"> Contact Phone Number (5555555555 10 digits only) </label>
+                        <x-form.input type="text" id="phone" name="phone" />
                     </div>
                 </div><!--/row-->
 

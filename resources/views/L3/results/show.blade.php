@@ -37,6 +37,7 @@
             <tr>
                 <th> Entry </th>
                 <th> Contestant </th>
+                <th> Gender </th>
                 <th> Member </th>
                 <th> Paid </th>
                 <th> Result(
@@ -65,6 +66,13 @@
                     </td>
                     <td> 
                         {{ $entry->contestant->lexical_name_order }} 
+                    </td>
+                    <td> 
+                        @if( $entry->contestant->sex)
+                            <img src="/assets/{{$entry->contestant->sex}}.png">
+                        @else
+                            ---
+                        @endif
                     </td>
                     <td>
                         @foreach($memberships[0] as $is_member)

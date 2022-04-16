@@ -22,7 +22,7 @@
             <table class="table bg-white border">
                 <thead>
                     <th></th>
-                    <th>Contestant</th>
+                    <th style="width: 160px">Contestant</th>
                     <th></th>
                     <th>Check in Notes</th>
                     <th></th>

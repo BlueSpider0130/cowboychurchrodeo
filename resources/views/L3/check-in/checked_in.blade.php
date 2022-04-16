@@ -50,6 +50,8 @@
                             <td>
                                 @if( $entry->contestant->sex )
                                     <img src="/assets/{{$entry->contestant->sex}}.png">
+                                @else
+                                ---
                                 @endif
                             </td>
                             <td>
