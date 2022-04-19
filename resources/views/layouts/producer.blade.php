@@ -266,7 +266,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ Route::is('L3.check-in.*') ? 'active' : '' }}" href="{{ route('L3.check-in.home', [$organization]) }}">
                                         <!--<i class="far fa-calendar-check"></i>-->
-                                        Work check-in
+                                        Work check in
                                     </a>
                                 </li> 
 

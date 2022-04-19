@@ -1,3 +1,7 @@
+       
+        @if( $rodeos->count() < 1 )
+            <i> <small class="text-muted"> There are no active rodeos... </small> </i> 
+        @else
         <table class="table table-responsive-cards bg-white border">
             <thead>
                 <tr>
@@ -40,3 +44,4 @@
                 @endforeach
             </tbody>
         </table>
+        @endif

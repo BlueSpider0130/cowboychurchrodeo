@@ -32,19 +32,26 @@ class ResultsController extends Controller
                     ->current()
                     ->orderBy('starts_at')
                     ->get();
+                    
+        $scheduled = $organization
+        ->rodeos()
+        ->scheduled()
+        ->orderBy('starts_at')
+        ->get();
 
         $ended = $organization
                     ->rodeos()
                     ->ended()
                     // ->whereNotIn('id', $active->pluck('id')->toArray())
-                    ->orderBy('starts_at')
+                    ->orderBy('starts_at', 'DESC')
                     ->get();
 
 
         return view('L3.results.home')
                 ->with('organization', $organization)
                 ->with('active', $active)
-                ->with('ended', $ended);
+                ->with('ended', $ended)
+                ->with('scheduled', $scheduled);
     }    
 
 

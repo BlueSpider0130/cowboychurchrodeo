@@ -39,16 +39,23 @@ class RegistrationController extends Controller
                     ->orderBy('starts_at')
                     ->get();
 
+        $currentRodeos = $organization
+                    ->rodeos()
+                    ->current()
+                    ->orderBy('starts_at')
+                    ->get();
+
         $endedRodeos = $organization
                     ->rodeos()
                     ->ended()
-                    ->orderBy('starts_at')
+                    ->orderBy('starts_at', 'desc')
                     ->get();
 
         return view('L2.registration.rodeos_index')
                 ->with('organization', $organization)
                 ->with('rodeos', $rodeos)
-                ->with('endedRodeos', $endedRodeos);
+                ->with('endedRodeos', $endedRodeos)
+                ->with('currentRodeos', $currentRodeos);
     }
 
 

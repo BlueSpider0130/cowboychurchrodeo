@@ -60,7 +60,7 @@
                 </p>
             @endif
 
-            <a href="{{ route('L3.check-in.contestants', [$organization->id, $rodeo->id]) }}" class="btn btn-primary" > Work check-in </a>
+            <a href="{{ route('L3.check-in.contestants', [$organization->id, $rodeo->id]) }}" class="btn btn-primary" > Work check in </a>
 
         </div>
     </div>

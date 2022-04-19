@@ -11,7 +11,6 @@
     </nav>
 </div>
 <div class="container-fluid">
-<!-- {{$memberships}} -->
     <x-session-alerts />
 
     <h1> Record results </h1>
@@ -35,14 +34,18 @@
     <table class="table table-responsive-cards bg-white border">
         <thead>
             <tr>
-                <th> Entry </th>
-                <th> Contestant </th>
-                <th> Gender </th>
-                <th> Member </th>
-                <th> Paid </th>
-                <th> Result(
+                <th style="vertical-align: inherit;"> Entry </th>
+                <th style="vertical-align: inherit;"> Contestant </th>
+                <th style="vertical-align: inherit;"> Gender </th>
+                <th style="vertical-align: inherit;"> Member </th>
+                <th style="vertical-align: inherit;"> Paid </th>
+                <th style="vertical-align: inherit;"> Result(
+                    @if($competition->event->result_type == 'time')
+                        <img src="/assets/clock.gif" style="width:30px; margin-bottom: 5px;" />
+                    @else($competition->event->result_type == 'score')
                         {{ucfirst($competition->event->result_type)}}
-                    ) 
+                    @endif
+                ) 
                 </th>
                 <th>Place</th>
             </tr>
@@ -100,9 +103,13 @@
                     <td>
                         @php
                             $counter++;
-                            if($previous == $entry->score || $previous == '0'){
+                            if($previous == $entry->score){
                                 if($entry->score != null){
-                                    echo $place;
+                                    if($previous == 0){
+                                        echo $place;
+                                    }elseif(!$competition->event->team_roping){
+                                        echo $place;
+                                    }
                                     $previous = $entry->score;
                                 }
                             }elseif($entry->score != null && is_numeric($entry->score)){

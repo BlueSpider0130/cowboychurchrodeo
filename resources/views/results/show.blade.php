@@ -15,13 +15,17 @@
     @endphp  
     <table class="table bg-white mt-4">
         <tr>
-            <td>name</td>
-            <td>Paid</td>
-            <th> Result(
+            <th style="vertical-align: inherit;">Name</th>
+            <th style="vertical-align: inherit;">Paid</th>
+            <th style="vertical-align: inherit;">Result(
+                @if($competition->event->result_type == 'time')
+                    <img src="/assets/clock.gif" style="width:30px; margin-bottom: 5px;" />
+                @else($competition->event->result_type == 'score')
                     {{ucfirst($competition->event->result_type)}}
+                @endif
                 ) 
             </th>
-            <th>Place</th>
+            <th style="vertical-align: inherit;">Place</th>
         </tr>
         @foreach( $results->sortBy(function ($results, $result_time) {
                                     if (!is_numeric($results['score'])) {
@@ -43,12 +47,16 @@
                 <td>
                     @php
                         $counter++;
-                        if($previous == $entry->score || $previous == '0'){
+                        if($previous == $entry->score){
                             if($entry->score != null){
-                                echo $place;
+                                if($previous == 0){
+                                    echo $place;
+                                }elseif(!$competition->event->team_roping){
+                                    echo $place;
+                                }
                                 $previous = $entry->score;
                             }
-                        }elseif($entry->score != null){
+                        }elseif($entry->score != null && is_numeric($entry->score)){
                             $place = $counter;
                             echo $place;
                             $previous = $entry->score;

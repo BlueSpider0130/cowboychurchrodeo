@@ -41,11 +41,16 @@
                 $days = \Carbon\Carbon::now()->diffInDays( $rodeo->starts_at );
             @endphp
             <div class="my-3 p-3 border rounded bg-white shadow-sm">
-                <a 
+                <!-- <a 
                     href="{{ route('L3.check-in.rodeo', [$organization->id, $rodeo->id]) }}" 
                     class="d-block text-dark" 
                     style="text-decoration: none;"
                     onclick="return confirm('This rodeo starts in {{ $days }} day{{ $days != 1 ? 's' : '' }}. Are you sure you want to check in contestants?')"
+                > -->
+                <a 
+                    href="{{ route('L3.check-in.rodeo', [$organization->id, $rodeo->id]) }}" 
+                    class="d-block text-dark" 
+                    style="text-decoration: none;"
                 >
                     <div> {{ $rodeo->name ? $rodeo->name : "Rodeo #{$rodeo->id}" }} </div>
                     <div>
@@ -68,11 +73,16 @@
         @foreach( $ended as $rodeo )
 
             <div class="my-3 p-3 border rounded bg-white shadow-sm">
-                <a 
+                <!-- <a 
                     href="{{ route('L3.check-in.rodeo', [$organization->id, $rodeo->id]) }}" 
                     class="d-block text-dark" 
                     style="text-decoration: none;"
                     onclick="return confirm('This rodeo has ended. Are you sure you want to check in contestants?')"
+                > -->
+                <a 
+                    href="{{ route('L3.check-in.rodeo', [$organization->id, $rodeo->id]) }}" 
+                    class="d-block text-dark" 
+                    style="text-decoration: none;"
                 >
                     <div> {{ $rodeo->name ? $rodeo->name : "Rodeo #{$rodeo->id}" }} </div>
                     <div>

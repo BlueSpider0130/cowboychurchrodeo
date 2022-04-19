@@ -27,6 +27,31 @@
         @endforeach
     </div>
 
+    <h2> Upcoming </h2>
+    <hr>
+    <div class="mb-5">
+        @if( $scheduled->count() < 1 )
+            <i> <small class="text-muted"> There are no upcoming rodeos.. </small> </i> 
+        @endif
+
+        @foreach( $scheduled as $rodeo )
+
+            <div class="my-3 p-3 border rounded bg-white shadow-sm">
+                <a 
+                    href="{{ route('L3.results.index', [$organization->id, $rodeo->id]) }}" 
+                    class="d-block text-dark" 
+                    style="text-decoration: none;"
+                >
+                    <div> {{ $rodeo->name ? $rodeo->name : "Rodeo #{$rodeo->id}" }} </div>
+                    <div>
+                        <x-rodeo-date :date="$rodeo->starts_at" /> &ndash; <x-rodeo-date :date="$rodeo->ends_at" />
+                    </div>
+                </a>
+            </div>
+
+        @endforeach
+    </div>
+
     <h2> Previous </h2>
     <hr>
     <div class="mb-5">
