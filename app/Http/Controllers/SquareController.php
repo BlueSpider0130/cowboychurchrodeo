@@ -74,11 +74,13 @@ class SquareController extends Controller
 
     public function addcard(Request $request)
     {
-        // var_dump('succjjjjj');
+        // dd('succjjjjj'); exit();
         $cardNonce = $request->nonce;
         $payAmount = $request -> pay_amount;
+        $office_fee = $request -> office_fee;
         $payerUserName = $request -> payer_user_name;
         $payerUserEmail = $request -> payer_user_email;
+        $total = $payAmount + $office_fee;
 
         $customersApi = new \SquareConnect\Api\CustomersApi($this->defaultApiClient);
         $customerId = $this->addCustomer($payerUserName, $payerUserEmail);
@@ -94,14 +96,14 @@ class SquareController extends Controller
         $card_exp_month = $result->getCard()->getExpMonth();
         $card_exp_year = $result->getCard()->getExpYear();
 
-        return $this->charge($customerId, $card_id, $payAmount);
+        return $this->charge($customerId, $card_id, $total);
 
         // return redirect()->back();
     }
 
     public function charge($customerId, $cardId, $payAmount)
     {
-
+        // dd($payAmount); exit();
         $payments_api = new \SquareConnect\Api\PaymentsApi($this->defaultApiClient);
         $payment_body = new \SquareConnect\Model\CreatePaymentRequest();
 

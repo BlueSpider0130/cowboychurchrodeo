@@ -59,7 +59,7 @@
                         
                         
 
-                            <div class="border rounded p-2 mb-3">ggg
+                            <div class="border rounded p-2 mb-3">
                                 <form 
                                     class="d-inline" 
                                     method="post" 

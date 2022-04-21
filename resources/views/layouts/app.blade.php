@@ -153,14 +153,15 @@
 
                 //  alert('here is your card token ' + nonce);
                 const pay_amount = $("#pay_val").val();
-                const tax = pay_amount * 0.05;
+                const office_fee = $("#office_fee").val();
+                const tax = (Number(pay_amount) + Number(office_fee)) * 0.05;
                 const contestant_id = $("#contestant_id").val();
                 const rodeo = $("#rodeo").val();
                 const payer_user_name = $("#payer_user_name").val();
                 const payer_user_email = $("#payer_user_email").val();
                 const contestant_name = $("#contestant_name").val();
                 const competition_entry_id = $("#competition_entries_id").val();
-                console.log(contestant_id);
+                console.log(tax);
                 // $('#success').hide();
                 $("#sq-creditcard").prop('disabled', true);
                 $.ajax({
@@ -172,6 +173,7 @@
                     data: {
                         'nonce':nonce,
                         'pay_amount':pay_amount,
+                        'office_fee': office_fee,
                         'contestant_id':contestant_id,
                         'payer_user_name':payer_user_name,
                         'payer_user_email': payer_user_email
@@ -187,7 +189,8 @@
                             url: "{{ route('L4.addPaymentTable') }}",
                             type: "POST",
                             data: {
-                                'amount':pay_amount,
+                                'amount':Number(pay_amount) + Number(office_fee),
+                                'office_fee':office_fee,
                                 'tax':tax,
                                 'contestant_id':contestant_id,
                                 'rodeo' : rodeo,

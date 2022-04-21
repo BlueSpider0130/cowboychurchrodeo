@@ -39,14 +39,7 @@
                 <th style="vertical-align: inherit;"> Gender </th>
                 <th style="vertical-align: inherit;"> Member </th>
                 <th style="vertical-align: inherit;"> Paid </th>
-                <th style="vertical-align: inherit;"> Result(
-                    @if($competition->event->result_type == 'time')
-                        <img src="/assets/clock.gif" style="width:30px; margin-bottom: 5px;" />
-                    @else($competition->event->result_type == 'score')
-                        {{ucfirst($competition->event->result_type)}}
-                    @endif
-                ) 
-                </th>
+                <th style="vertical-align: inherit;"> Result({{ucfirst($competition->event->result_type)}}) </th>
                 <th>Place</th>
             </tr>
         </thead>
@@ -113,9 +106,15 @@
                                     $previous = $entry->score;
                                 }
                             }elseif($entry->score != null && is_numeric($entry->score)){
-                                $place = $counter;
-                                echo $place;
-                                $previous = $entry->score;
+                                if(!$competition->event->team_roping){
+                                    $place = $counter;
+                                    echo $place;
+                                    $previous = $entry->score;
+                                }else{
+                                    echo $place;
+                                    $place++;
+                                    $previous = $entry->score;
+                                }
                             }
                         @endphp
                     </td>

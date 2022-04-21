@@ -329,8 +329,12 @@ class RegistrationEntryController extends Controller
         $pay_data =json_decode($request->input('pay_data'));
         // dd(count($pay_data));
         $pay_amount = 0;
+        $isOfficeFee = true;
         for ($i=0; $i <= count($pay_data)-1; $i++) { 
             $pay_amount = $pay_amount + $pay_data[$i] -> entry_fee;
+            if ($pay_data[$i] -> group -> name != 'PEE WEE') {
+                $isOfficeFee = false;
+            }
         }
         if( $organization->id != $rodeo->organization_id )
         {
@@ -409,7 +413,8 @@ class RegistrationEntryController extends Controller
                 ->with('payer_user_name', $request->user()->name)
                 ->with('payer_user_email', $request -> user()->email)
                 ->with('payAmount', $pay_amount)
-                ->with('competitionEntries', $competitionEntries);        
+                ->with('competitionEntries', $competitionEntries)
+                ->with('isOfficeFee', $isOfficeFee);        
     }
 
 }

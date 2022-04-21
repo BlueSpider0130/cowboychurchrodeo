@@ -44,7 +44,7 @@ class CheckInController extends Controller
         $ended = $organization
                     ->rodeos()
                     ->ended()
-                    ->orderBy('starts_at')
+                    ->orderBy('starts_at', 'desc')
                     ->get();
 
         return view('L3.check-in.home')

@@ -28,16 +28,36 @@
                 @endforeach
             </div>
             <div class="row off-fee">
-                <p>Total fee</p>
+                <p>Office fee</p>
             </div>
             <div class="row fee-dollar" id="office">
-                <p>${{$payAmount * 0.05}}</p>
+                @if( $isOfficeFee )
+                ---
+                @else
+                <p>${{$rodeo->office_fee}}</p>
+                @endif
+            </div>
+            <div class="row off-fee">
+                <p>Credit Card Fee</p>
+            </div>
+            <div class="row fee-dollar" id="office">
+                @if( $isOfficeFee )
+                <p>${{ ($payAmount) * 0.05 }}</p>
+                @else
+                <p>${{ ($payAmount + $rodeo->office_fee) * 0.05 }}</p>
+                @endif
             </div>
             <div class="row off-fee">
                 <p>Total</p>
             </div>
             <div class="row fee-dollar" id="total_amount">
-                <p>${{ $payAmount * 1.05 }}</p>
+                @if( $isOfficeFee )
+                <p>${{ ($payAmount) * 1.05 }}</p>
+                <input type="hidden" id="office_fee" value="0" />
+                @else
+                <p>${{ ($payAmount + $rodeo->office_fee) * 1.05 }}</p>
+                <input type="hidden" id="office_fee" value="{{$rodeo->office_fee}}" />
+                @endif 
                 <input type="hidden" id="pay_val" value="{{$payAmount}}" />
                 <input type="hidden" id="contestant_id" value="{{$contestant->id}}" />
                 <input type="hidden" id="rodeo" value="{{$rodeo->id}}" />

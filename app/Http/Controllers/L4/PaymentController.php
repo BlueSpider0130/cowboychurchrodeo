@@ -26,6 +26,7 @@ class PaymentController extends Controller
     public function addPaymentTable( Request $request )
     {
         $amount = $request -> amount;
+        $office_fee = $request -> office_fee;
         $tax = $request -> tax;
         $contestant_user_id = $request-> contestant_id;
         $rodeo = $request -> rodeo;
@@ -53,19 +54,19 @@ class PaymentController extends Controller
         $competitionEntry -> where('id', $competition_entry_id)->update(['paid' => "3", 'payment_id' => $getPaymentId]);
 
         $rodeoEntry = new RodeoEntry;
-        $previousNotes = $rodeoEntry 
-                    -> whereNotNull('check_in_notes') 
-                    -> where('contestant_id', $contestant_user_id) 
-                    -> where('rodeo_id', $rodeo)
-                    ->get()
-                    ->first();
+        // $previousNotes = $rodeoEntry 
+        //             -> whereNotNull('check_in_notes') 
+        //             -> where('contestant_id', $contestant_user_id) 
+        //             -> where('rodeo_id', $rodeo)
+        //             ->get()
+        //             ->first();
         $rodeoEntry::updateOrCreate
         (
             ['contestant_id' => $contestant_user_id, 'rodeo_id' => $rodeo],
             [
                 'contestant_id' => $contestant_user_id,
                 'rodeo_id' => $rodeo,
-                'check_in_notes' => $previousNotes->check_in_notes . "/" . $contestant_name . "/" . "Events:" . $amount . "/Fee:" . $tax . "/Total:" . $amount * 1.05 , 
+                'check_in_notes' => $contestant_name . "/" . "Events:" . $amount . "/Credit Card Fee:" . $tax . "/Office Fee:" . $office_fee . "/Total:" . $amount * 1.05 , 
                 'checked_in_notes' => 'Paid Online',
                 'checked_in_at' => Carbon::now() -> toDateTimeString(),
                 'checked_in_by_user_id' => $payer_user_id,

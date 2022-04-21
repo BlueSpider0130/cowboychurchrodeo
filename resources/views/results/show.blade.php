@@ -17,14 +17,7 @@
         <tr>
             <th style="vertical-align: inherit;">Name</th>
             <th style="vertical-align: inherit;">Paid</th>
-            <th style="vertical-align: inherit;">Result(
-                @if($competition->event->result_type == 'time')
-                    <img src="/assets/clock.gif" style="width:30px; margin-bottom: 5px;" />
-                @else($competition->event->result_type == 'score')
-                    {{ucfirst($competition->event->result_type)}}
-                @endif
-                ) 
-            </th>
+            <th style="vertical-align: inherit;">Result ({{ucfirst($competition->event->result_type)}}) </th>
             <th style="vertical-align: inherit;">Place</th>
         </tr>
         @foreach( $results->sortBy(function ($results, $result_time) {
@@ -57,10 +50,16 @@
                                 $previous = $entry->score;
                             }
                         }elseif($entry->score != null && is_numeric($entry->score)){
-                            $place = $counter;
-                            echo $place;
-                            $previous = $entry->score;
-                        }
+                                if(!$competition->event->team_roping){
+                                    $place = $counter;
+                                    echo $place;
+                                    $previous = $entry->score;
+                                }else{
+                                    echo $place;
+                                    $place++;
+                                    $previous = $entry->score;
+                                }
+                            }
                     @endphp
                 </td>
             </tr>

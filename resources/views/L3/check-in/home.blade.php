@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
 
-    <h1> Rodeo check-in </h1>
+    <h1> Rodeo check in </h1>
     <hr class="mb-5">
 
     <h2> Current </h2>
