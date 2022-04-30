@@ -25,7 +25,7 @@ class PaymentController extends Controller
 
     public function addPaymentTable( Request $request )
     {
-        $amount = $request -> amount;
+        $amount = $request -> amount; //event fee + office_fee
         $office_fee = $request -> office_fee;
         $tax = $request -> tax;
         $contestant_user_id = $request-> contestant_id;
@@ -44,6 +44,7 @@ class PaymentController extends Controller
         $payment -> payer_user_id = $payer_user_id;
         $payment -> created_by_user_id = $payer_user_id;
         $payment -> method = "3"; 
+        $payment -> rodeo_id = $rodeo;
         $payment -> save();
 
         $getPaymentId = $payment -> where('payer_user_id', $payer_user_id)
@@ -51,7 +52,7 @@ class PaymentController extends Controller
                                  ->max('id');
                                  
         $competitionEntry = new CompetitionEntry;
-        $competitionEntry -> where('id', $competition_entry_id)->update(['paid' => "3", 'payment_id' => $getPaymentId]);
+        $competitionEntry -> where('id', $competition_entry_id)->update(['payment_id' => $getPaymentId]);
 
         $rodeoEntry = new RodeoEntry;
         // $previousNotes = $rodeoEntry 

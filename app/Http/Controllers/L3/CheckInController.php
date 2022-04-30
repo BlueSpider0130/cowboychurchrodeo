@@ -9,6 +9,7 @@ use App\Rodeo;
 use App\Contestant;
 use App\RodeoEntry;
 use App\Membership;
+use App\Payment;
 
 class CheckInController extends Controller
 {
@@ -92,10 +93,22 @@ class CheckInController extends Controller
                             ->with(['contestant'])
                             ->get()
                             ->sortBy('contestant.last_name');
+        $contestantIds = [];
+        foreach( $checkedInEntries as $checkedInEntry ){
+            $contestantId = $checkedInEntry->contestant_id;
+            array_push($contestantIds, $contestantId);
+        }
+
+        $entries = $rodeo
+                    ->competition_entries()
+                    ->with(['competition', 'competition.event', 'competition.group'])
+                    ->whereIn('contestant_id', $contestantIds)
+                    ->get();
 
         return view('L3.check-in.checked_in')
                 ->with('organization', $organization)
                 ->with('rodeo', $rodeo)
+                ->with('entries', $entries)
                 ->with('checkedInEntries', $checkedInEntries);                            
     }
 
@@ -259,7 +272,18 @@ class CheckInController extends Controller
             }
         }
 
-        $rodeoEntries = $rodeo->entries;
+        // $rodeoEntries = $rodeo->entries;
+        // $payment = new Payment;
+        // $payment_method = [];
+        // foreach( $rodeoEntries as $rodeoEntry )
+        // {
+        //     $payment = $payment ->where('id', $rodeoEntry->payment_id)
+        //                         ->get()
+        //                         ->first();
+        //     if( $rodeoEntry -> checked_in_at && $payment ){
+        //         array_push($payment_method, $payment);
+        //     }
+        // }
 
         $entries = $rodeo
                     ->competition_entries()
@@ -267,7 +291,7 @@ class CheckInController extends Controller
                     ->whereIn('contestant_id', $validated['contestants'])
                     ->get();
 
-        $rodeoEntries = $rodeo->entries()->whereIn('contestant_id', $validated['contestants'])->get();
+        $rodeoEntries = $rodeo->entries()->with(['payment', 'contestant'])->whereIn('contestant_id', $validated['contestants'])->get();
 
         $oldCheckedInNotes = '';
 
@@ -286,7 +310,9 @@ class CheckInController extends Controller
                 ->with('entries', $entries)
                 ->with('rodeoEntries', $rodeoEntries)
                 ->with('addMembershipToContestantIds', $validated['memberships'])
-                ->with('oldCheckedInNotes', $oldCheckedInNotes);
+                ->with('oldCheckedInNotes', $oldCheckedInNotes)
+                // ->with('payments', $payment_method)
+                ;
     }
 
 
@@ -369,12 +395,36 @@ class CheckInController extends Controller
         {
             abort(404);
         }
+        $paymentMethod = $request->input('payment');
+        if($paymentMethod == 1){
+            $stringPaymentMethod = 'Cash';
+        }elseif($paymentMethod == 2){
+            $stringPaymentMethod = 'Check';
+        }elseif( $paymentMethod == 3 ){
+            $stringPaymentMethod = 'Credit Card';
+        }elseif( $paymentMethod == 4 ){
+            $stringPaymentMethod = 'Other';
+        }
+        $totalAmount = $request->input('total_amount');
+        $feeSum = $request->input('fee_sum');
 
         $submittedIds = is_array($request->input('contestants', []))
                             ?  $request->input('contestants', [])
                             :  [];
 
-        $contestants = $organization->contestants()->whereIn('id', $submittedIds)->get();
+        $contestants = $organization->contestants()->whereIn('id', $submittedIds)->with('users')->get();
+
+        $paymentUserId = $contestants->first()->users[0] -> id;
+
+        $payment = new Payment;
+        $payment -> amount = $totalAmount;
+        $payment -> tax = $feeSum;
+        $payment -> payer_user_id = $paymentUserId;
+        $payment -> created_by_user_id = $paymentUserId;
+        $payment -> method = $paymentMethod; 
+        $payment -> rodeo_id = $rodeo->id;
+        $payment -> save();
+
         $rodeoEntries = $rodeo->entries;
 
         $validated = $request->validate([
@@ -419,7 +469,9 @@ class CheckInController extends Controller
             ->whereIn('contestant_id', $validated['contestants'])
             ->update([
                 'checked_in_at' => \Carbon\Carbon::now(),
-                'checked_in_notes' => isset($validated['notes']) ? $validated['notes'] : null
+                'checked_in_notes' => isset($validated['notes']) ? 
+                    $validated['notes'] . '/ Events:' . $totalAmount . '/ Credit Card Fee:' . $feeSum . '/ Total:' . ($totalAmount+$feeSum) . '/Payment method:' . $stringPaymentMethod : 
+                    'Events:' . $totalAmount . '/ Credit Card Fee:' . $feeSum . '/ Total:' . ($totalAmount+$feeSum) . '/Payment method:' . $stringPaymentMethod
             ]);
 
         // update memberships as paid.. 

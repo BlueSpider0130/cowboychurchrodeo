@@ -154,7 +154,6 @@
             </div>
 
 
-
             <div class="card-footer bg-white">
 
                 @if( $rodeoEntries->whereNotNull('check_in_notes')->count() > 0 )
@@ -186,7 +185,83 @@
                         <input type="hidden" name="memberships[]" value="{{ $id }}" />
                     @endforeach
 
+                    @php
+                        $fee_sum = 0;
+                    @endphp
 
+
+                    <div class="mt-2 mb-4">
+                        <label> Paid by </label>
+                        <hr class="my-2"> 
+                        
+                            <label style="font-weight-bold"> Cash </label>
+                            <input 
+                                type="radio" 
+                                id="cash" 
+                                name="payment" 
+                                value="1" 
+                                @foreach ($rodeoEntries as $key => $rodeoEntry)
+                                    @if ($rodeoEntry->payment && $rodeoEntry->payment->method == 1)
+                                        checked
+                                    @endif
+                                @endforeach
+                                required
+                            /> &nbsp;&nbsp;
+                            <label style="font-weight-bold"> Check </label>
+                            <input 
+                                type="radio" 
+                                id="check" 
+                                name="payment" 
+                                value="2" 
+                                @foreach ($rodeoEntries as $key => $rodeoEntry)
+                                    @if ($rodeoEntry->payment && $rodeoEntry->payment->method == 2)
+                                        checked
+                                    @endif
+                                @endforeach
+                                required
+                            /> &nbsp;&nbsp;
+                            <label style="font-weight-bold"> CC </label>
+                            <input 
+                                type="radio" 
+                                id="cc" 
+                                name="payment" 
+                                value="3" 
+                                @foreach ($rodeoEntries as $key => $rodeoEntry)
+                                    @if ($rodeoEntry->payment && $rodeoEntry->payment->method == 3)
+                                        checked
+                                    @endif
+                                @endforeach
+                                required
+                            /> &nbsp;&nbsp;
+                            <label style="font-weight-bold"> Other </label>
+                            <input 
+                                type="radio" 
+                                id="other" 
+                                name="payment" 
+                                value="4" 
+                                @foreach ($rodeoEntries as $key => $rodeoEntry)
+                                    @if ($rodeoEntry->payment && $rodeoEntry->payment->method == 4)
+                                        checked
+                                    @endif
+                                @endforeach
+                                required
+                            /> <br><br>
+                                @foreach ($rodeoEntries as $key => $rodeoEntry)
+                                    @if ($rodeoEntry->payment && $rodeoEntry->payment->tax)
+                                            @php
+                                                $fee_sum += $rodeoEntry->payment->tax;
+                                            @endphp
+                                    @endif
+                                @endforeach
+                            <label style="font-weight-bold"> Fee </label>
+                            <textarea name="fee_sum" class="form-control @error('notes') is-invalid @enderror" >{{$fee_sum}}</textarea>
+                            <label style="font-weight-bold"> Total amount </label>
+                            <textarea name="total_amount" class="form-control @error('notes') is-invalid @enderror" >{{$total}}</textarea>
+                        
+
+                    </div>
+
+                    <hr class="my-4">
 
                     <div class="mt-2 mb-4">
                         <label> Check-in notes </label>
@@ -213,6 +288,6 @@
         </div><!--/card-->
     </div>
 
-
+{{-- {{json_encode($rodeoEntries)}} --}}
 </div>
 @endsection
